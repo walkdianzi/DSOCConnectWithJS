@@ -1,6 +1,6 @@
 # DSOCConnectWithJS
 
-[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/walkdianzi/DSPhotoBrowser/blob/master/LICENSE)&nbsp;
+[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/walkdianzi/DSOCConnectWithJS/blob/master/License)&nbsp;
 
 Use WebViewJavascriptBridge sending messages between Obj-C and JavaScript in UIWebViews/WebViews.
 
