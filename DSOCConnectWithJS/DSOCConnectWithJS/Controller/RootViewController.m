@@ -23,19 +23,28 @@
     self.title = @"OC与JS";
     _items = @{
                
-               @"简单的交互通信":@[
+               @"UIWebView":@[
                             @"OCToJS",
                             @"JSToOC"
                         ],
+               @"WKWebView":@[
+                       @"WKOCToJS",
+                       @"WKJSToOC"
+                       ],
              };
     
     _itemsName = @{
                    
-                   @"简单的交互通信":@[
+                   @"UIWebView":@[
                            @"OC调用JS",
                            @"JS调用OC",
                             ],
+                   @"WKWebView":@[
+                           @"OC调用JS",
+                           @"JS调用OC",
+                           ],
                    };
+    
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     [self.tableView reloadData];
 }

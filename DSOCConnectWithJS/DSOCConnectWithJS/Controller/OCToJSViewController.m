@@ -8,17 +8,9 @@
 
 #import "OCToJSViewController.h"
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "JSObject.h"
 
-@protocol JSObjcDelegate <JSExport>
-
-//此处我们测试几种参数的情况
--(void)TestNOParameter;
--(NSString *)TestOneParameter:(NSString *)message;
--(NSString *)TestTwoParameter:(NSString *)message1 SecondParameter:(NSString *)message2;
-
-@end
-
-@interface OCToJSViewController()<JSObjcDelegate>
+@interface OCToJSViewController()
 
 @end
 
@@ -53,13 +45,6 @@
     buttonOne.backgroundColor = [UIColor redColor];
     [buttonOne addTarget:self action:@selector(buttonOneClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:buttonOne];
-    
-    
-    UIButton *buttonTwo = [[UIButton alloc] initWithFrame:CGRectMake(10, 150, 250, 50)];
-    [buttonTwo setTitle:@"调用js：TestTowParameter" forState:UIControlStateNormal];
-    buttonTwo.backgroundColor = [UIColor redColor];
-    [buttonTwo addTarget:self action:@selector(buttonTwoClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:buttonTwo];
 }
 
 #pragma mark - Click Methon
@@ -67,15 +52,7 @@
 - (void)buttonOneClick:(UIButton *)sender{
     
     if (_context) {
-        NSString *alertJS=@"alert(Toyun.TestOneParameter('参数1'))"; //准备执行的js代码
-        [_context evaluateScript:alertJS];//通过oc方法调用js的alert
-    }
-}
-
-- (void)buttonTwoClick:(UIButton *)sender{
-    
-    if (_context) {
-        NSString *alertJS=@"alert(Toyun.TestTwoParameterSecondParameter('第一个参数','第二个参数'))"; //准备执行的js代码
+        NSString *alertJS=@"redHeader(\"red\")"; //准备执行的js代码
         [_context evaluateScript:alertJS];//通过oc方法调用js的alert
     }
 }
@@ -103,9 +80,12 @@
         }
     }
     
+    JSObject *object = [[JSObject alloc] init];
+    
     //此处把js方法注入。使js可以调用oc方法。  为了测试，先把js方法注入，然后再使用oc调用js方法
     _context=[webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
-    _context[@"Toyun"] = self;
+    _context[@"Toyun"] = object;
+    _context.exception = nil;
 }
 
 
@@ -118,22 +98,15 @@
 
 #pragma mark JSObjcDelegate
 
-//一下方法都是只是打了个log 等会看log 以及参数能对上就说明js调用了此处的iOS 原生方法
--(void)TestNOParameter{
+- (void)dealloc{
     
-    NSLog(@"this is ios TestNOParameter");
-}
-
--(NSString *)TestOneParameter:(NSString *)message{
+    _myWebView.delegate = nil;
+    [_myWebView loadHTMLString:@"" baseURL:nil];
+    [_myWebView stopLoading];
+    _myWebView = nil;
     
-    NSLog(@"this is ios TestOneParameter=%@",message);
-    return @"this is ios TestOneParameter";
-}
-
--(NSString *)TestTwoParameter:(NSString *)message1 SecondParameter:(NSString *)message2{
-    
-    NSLog(@"this is ios TestTwoParameter=%@  Second=%@",message1,message2);
-    return @"this is ios TestTwoParameter";
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    NSLog(@"我被释放了");
 }
 
 @end

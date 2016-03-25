@@ -8,19 +8,10 @@
 
 #import "JSToOCViewController.h"
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "JSObject.h"
 
 
-@protocol JSObjcDelegate <JSExport>
-
-//此处我们测试几种参数的情况
--(void)TestNOParameter;
--(NSString *)TestOneParameter:(NSString *)message;
--(NSString *)TestTwoParameter:(NSString *)message1 SecondParameter:(NSString *)message2;
-
-@end
-
-
-@interface JSToOCViewController()<JSObjcDelegate,UIWebViewDelegate>
+@interface JSToOCViewController()<UIWebViewDelegate>
 
 @end
 
@@ -40,7 +31,7 @@
     //本地html
     NSString *path = [[NSBundle mainBundle] bundlePath];
     NSURL *baseURL = [NSURL fileURLWithPath:path];
-    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"index"
+    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"jsindex"
                                                           ofType:@"html"];
     NSString * htmlCont = [NSString stringWithContentsOfFile:htmlPath
                                                     encoding:NSUTF8StringEncoding
@@ -60,8 +51,8 @@
     
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"WebKitCacheModelPreferenceKey"];
     
     if ([self.title isEqualToString:@""]||!self.title) {
@@ -71,11 +62,10 @@
         }
     }
     
-    JSContext *context=[webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
-    context[@"Toyun"]=self;
+    JSObject *object = [[JSObject alloc] init];
     
-//    NSString *alertJS=@"alert(Toyun.TestOneParameter('参数1'))"; //准备执行的js代码
-//    [context evaluateScript:alertJS];//通过oc方法调用js的alert
+    JSContext *context=[webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    context[@"Toyun"] = object;
 }
 
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType //这个方法是网页中的每一个请求都会被触发的
@@ -85,24 +75,9 @@
 }
 
 
-#pragma mark JSObjcDelegate
-
-//一下方法都是只是打了个log 等会看log 以及参数能对上就说明js调用了此处的iOS 原生方法
--(void)TestNOParameter{
+- (void)dealloc{
     
-    NSLog(@"this is ios TestNOParameter");
-}
-
--(NSString *)TestOneParameter:(NSString *)message{
-    
-    NSLog(@"this is ios TestOneParameter=%@",message);
-    return @"this is ios TestOneParameter";
-}
-
--(NSString *)TestTwoParameter:(NSString *)message1 SecondParameter:(NSString *)message2{
-    
-    NSLog(@"this is ios TestTwoParameter=%@  Second=%@",message1,message2);
-    return @"this is ios TestTwoParameter";
+    NSLog(@"我被释放了");
 }
 
 @end
