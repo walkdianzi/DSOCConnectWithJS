@@ -40,11 +40,17 @@
     [_myWebView loadHTMLString:htmlCont baseURL:baseURL];
 
     
-    UIButton *buttonOne = [[UIButton alloc] initWithFrame:CGRectMake(10, 70, 250, 50)];
-    [buttonOne setTitle:@"调用js：TestOneParameter" forState:UIControlStateNormal];
+    UIButton *buttonOne = [[UIButton alloc] initWithFrame:CGRectMake(10, 70, 250, 45)];
+    [buttonOne setTitle:@"调用js：标题变红" forState:UIControlStateNormal];
     buttonOne.backgroundColor = [UIColor redColor];
     [buttonOne addTarget:self action:@selector(buttonOneClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:buttonOne];
+    
+    UIButton *buttonTwo = [[UIButton alloc] initWithFrame:CGRectMake(10, 120, 250, 45)];
+    [buttonTwo setTitle:@"调用js：标题变黑" forState:UIControlStateNormal];
+    buttonTwo.backgroundColor = [UIColor redColor];
+    [buttonTwo addTarget:self action:@selector(buttonTwoClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:buttonTwo];
 }
 
 #pragma mark - Click Methon
@@ -53,8 +59,15 @@
     
     if (_context) {
         NSString *alertJS=@"redHeader(\"red\")"; //准备执行的js代码
-        [_context evaluateScript:alertJS];//通过oc方法调用js的alert
+        JSValue *value = [_context evaluateScript:alertJS];//通过oc方法调用js的alert
+        NSLog(@"%@",value.toString);
     }
+}
+
+- (void)buttonTwoClick:(UIButton *)sender{
+    
+    NSString *string = [_myWebView stringByEvaluatingJavaScriptFromString:@"redHeader(\"black\")"];
+    NSLog(@"%@",string);
 }
 
 #pragma mark - UIWebViewDelegate

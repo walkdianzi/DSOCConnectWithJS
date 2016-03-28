@@ -16,6 +16,7 @@
 -(NSString *)TestOneParameter:(NSString *)message;
 -(NSString *)TestTwoParameter:(NSString *)message1 SecondParameter:(NSString *)message2;
 
+-(void)postMessage:(NSString *)message;
 @end
 
 @interface JSObject : NSObject<JSObjcDelegate>

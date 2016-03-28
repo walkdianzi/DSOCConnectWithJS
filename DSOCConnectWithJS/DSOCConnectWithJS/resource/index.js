@@ -19,5 +19,7 @@ function callNativeApp() {
 }
 
 function redHeader(text) {
+    
     document.querySelector('h1').style.color = text;
+    return "颜色改变成功";
 }

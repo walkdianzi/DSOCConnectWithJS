@@ -28,4 +28,9 @@
     return @"this is ios TestTwoParameter";
 }
 
+- (void)postMessage:(NSString *)message{
+    
+    NSLog(@"this is ios TestTwoParameter=%@",message);
+}
+
 @end

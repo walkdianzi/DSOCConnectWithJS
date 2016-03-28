@@ -108,6 +108,8 @@
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
     
     NSLog(@"JS 调用了 %@ 方法，传回参数 %@",message.name,message.body);
+    
+    //如果需要回调，直接调用OC调用JS的方法
 }
 
 

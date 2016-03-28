@@ -63,7 +63,11 @@
 
 -(void)buttonOneClick:(UIButton *)sender{
    
-    [_myWebView evaluateJavaScript:@"redHeader(\"red\")" completionHandler:nil];
+    [_myWebView evaluateJavaScript:@"redHeader(\"red\")" completionHandler:^(id _Nullable string, NSError * _Nullable error) {
+        
+        //js返回值
+        NSLog(@"%@",string);
+    }];
 }
 
 

@@ -221,11 +221,11 @@
 			isa = PBXGroup;
 			children = (
 				1352FF7F1CA5323600289E94 /* jsindex.html */,
+				13D4DEB01CA3E43600DF4B48 /* index.html */,
 				1352FF801CA5323600289E94 /* wkjsindex.html */,
 				1352FF7D1CA510B200289E94 /* wkindex.html */,
 				13D4DEAE1CA3E43500DF4B48 /* 2.pic_hd.jpg */,
 				13D4DEAF1CA3E43600DF4B48 /* index.css */,
-				13D4DEB01CA3E43600DF4B48 /* index.html */,
 				13D4DEB11CA3E43600DF4B48 /* index.js */,
 			);
 			path = resource;
