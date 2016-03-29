@@ -68,8 +68,30 @@
         //js返回值
         NSLog(@"%@",string);
     }];
+    
+    
+    /* 调用js的alert是在WKUIDelegate的runJavaScriptAlertPanelWithMessage方法里实现的。
+       还有confirm、prompt这两种js方法也是有对应的代理方法的
+    [_myWebView evaluateJavaScript:@"hello()" completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+        
+        NSLog(@"%@",response);
+    }];
+    */
 }
 
+
+#pragma mark WKUIDelegate
+
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"alert" message:@"JS调用alert" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler();
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:NULL];
+    NSLog(@"%@", message);   //js的alert框的message
+}
 
 #pragma mark- WKNavigationDelegate
 

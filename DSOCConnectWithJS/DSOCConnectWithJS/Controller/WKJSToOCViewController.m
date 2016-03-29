@@ -10,30 +10,7 @@
 #import <WebKit/WKScriptMessageHandler.h>
 #import <WebKit/WebKit.h>
 #import <JavaScriptCore/JavaScriptCore.h>
-
-@interface WeakScriptMessageDelegate : NSObject<WKScriptMessageHandler>
-
-@property (nonatomic, weak) id<WKScriptMessageHandler> scriptDelegate;
-- (instancetype)initWithDelegate:(id<WKScriptMessageHandler>)scriptDelegate;
-@end
-
-@implementation WeakScriptMessageDelegate
-
-- (instancetype)initWithDelegate:(id<WKScriptMessageHandler>)scriptDelegate
-{
-    self = [super init];
-    if (self) {
-        _scriptDelegate = scriptDelegate;
-    }
-    return self;
-}
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
-    
-    [self.scriptDelegate userContentController:userContentController didReceiveScriptMessage:message];
-}
-@end
-
-
+#import "WeakScriptMessageDelegate.h"
 
 
 @interface WKJSToOCViewController ()<WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler>{
@@ -64,8 +41,9 @@
     _myWebView.navigationDelegate = self;
     [self.view addSubview:_myWebView];
     
+    
     [[_myWebView configuration].userContentController addScriptMessageHandler:[[WeakScriptMessageDelegate alloc] initWithDelegate:self] name:@"callbackHandler"];
-    /*下面这种方式会造成内存泄露，所以用上面这种创建了一个中间对象
+    /*下面这种方式会循环引用造成内存泄露，所以用上面这种创建了一个中间对象
     [[_myWebView configuration].userContentController addScriptMessageHandler:self name:@"callbackHandler"];
     */
     

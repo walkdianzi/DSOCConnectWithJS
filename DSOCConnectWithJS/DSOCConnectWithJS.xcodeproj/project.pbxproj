@@ -25,6 +25,7 @@
 		1352FF811CA5323600289E94 /* jsindex.html in Resources */ = {isa = PBXBuildFile; fileRef = 1352FF7F1CA5323600289E94 /* jsindex.html */; };
 		1352FF821CA5323600289E94 /* wkjsindex.html in Resources */ = {isa = PBXBuildFile; fileRef = 1352FF801CA5323600289E94 /* wkjsindex.html */; };
 		1352FF861CA53B7600289E94 /* JSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1352FF851CA53B7600289E94 /* JSObject.m */; };
+		1352FF891CAA18DE00289E94 /* WeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1352FF881CAA18DE00289E94 /* WeakScriptMessageDelegate.m */; };
 		13D4DEAC1CA3DDBB00DF4B48 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13D4DEAB1CA3DDBB00DF4B48 /* JavaScriptCore.framework */; };
 		13D4DEB21CA3E43600DF4B48 /* 2.pic_hd.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 13D4DEAE1CA3E43500DF4B48 /* 2.pic_hd.jpg */; };
 		13D4DEB31CA3E43600DF4B48 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = 13D4DEAF1CA3E43600DF4B48 /* index.css */; };
@@ -82,6 +83,8 @@
 		1352FF801CA5323600289E94 /* wkjsindex.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = wkjsindex.html; sourceTree = "<group>"; };
 		1352FF841CA53B7600289E94 /* JSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSObject.h; sourceTree = "<group>"; };
 		1352FF851CA53B7600289E94 /* JSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSObject.m; sourceTree = "<group>"; };
+		1352FF871CAA18DE00289E94 /* WeakScriptMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeakScriptMessageDelegate.h; sourceTree = "<group>"; };
+		1352FF881CAA18DE00289E94 /* WeakScriptMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeakScriptMessageDelegate.m; sourceTree = "<group>"; };
 		13D4DEAB1CA3DDBB00DF4B48 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		13D4DEAE1CA3E43500DF4B48 /* 2.pic_hd.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.pic_hd.jpg; sourceTree = "<group>"; };
 		13D4DEAF1CA3E43600DF4B48 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 			children = (
 				1352FF841CA53B7600289E94 /* JSObject.h */,
 				1352FF851CA53B7600289E94 /* JSObject.m */,
+				1352FF871CAA18DE00289E94 /* WeakScriptMessageDelegate.h */,
+				1352FF881CAA18DE00289E94 /* WeakScriptMessageDelegate.m */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 				1315D81A1C5084C00019DACA /* main.m in Sources */,
 				1352FF7A1CA5063200289E94 /* WKJSToOCViewController.m in Sources */,
 				1315D8521C50874C0019DACA /* RootViewController.m in Sources */,
+				1352FF891CAA18DE00289E94 /* WeakScriptMessageDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

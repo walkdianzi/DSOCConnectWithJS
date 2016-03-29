@@ -58,8 +58,8 @@
 - (void)buttonOneClick:(UIButton *)sender{
     
     if (_context) {
-        NSString *alertJS=@"redHeader(\"red\")"; //准备执行的js代码
-        JSValue *value = [_context evaluateScript:alertJS];//通过oc方法调用js的alert
+        NSString *jsString=@"redHeader(\"red\")"; //准备执行的js代码
+        JSValue *value = [_context evaluateScript:jsString];//通过oc方法调用js的alert
         NSLog(@"%@",value.toString);
     }
 }
@@ -67,6 +67,7 @@
 - (void)buttonTwoClick:(UIButton *)sender{
     
     NSString *string = [_myWebView stringByEvaluatingJavaScriptFromString:@"redHeader(\"black\")"];
+    //NSString *string = [_myWebView stringByEvaluatingJavaScriptFromString:@"hello()"];
     NSLog(@"%@",string);
 }
 
